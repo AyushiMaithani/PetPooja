@@ -13,8 +13,7 @@ function Header() {
         <h1 className="text-lg font-semibold text-[#f5f5f5]">Petpooja</h1>
       </div>
       {/* SEARCHBAR */}
-      <div
-        className="flex items-center gap-4 bg-[#333] rounded-[15px] px-5 py-2 w-[500px]">
+      <div className="flex items-center gap-4 bg-[#333] rounded-[15px] px-5 py-2 w-[500px]">
         <FaSearch className="text-[#f5f5f5]" />
         <input
           type="text"
