@@ -39,8 +39,9 @@ const Tables = () => {
   {tables.map((table) => {
     return (
       <TableCard
-        key={table.id} // Add a unique key for each TableCard, assuming 'table.id' exists
-        name={table.name}  // Fix the prop name to match 'name'
+        key={table.id} 
+        id={table.id}
+        name={table.name} 
         status={table.status}
         initials={table.initial}
       />
