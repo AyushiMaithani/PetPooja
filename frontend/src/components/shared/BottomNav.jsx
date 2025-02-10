@@ -5,14 +5,22 @@ import { BiSolidDish } from "react-icons/bi";
 import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setCustomerName } from "../../redux/slices/customerSlice";
 
 const BottomNav = () => {
   const navigate = useNavigate();
   const location= useLocation();
+  const dispatch=useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [guestCount, setGuestCount] = useState(0);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  const [guestCount, setGuestCount] = useState(0);
+
+
   const increment = () => {
     if (guestCount >= 6) return; // Prevent incrementing above 6
     setGuestCount((prev) => prev + 1);
@@ -25,6 +33,10 @@ const BottomNav = () => {
   };
 
   const isActive = (path) => location.pathname===path;
+  const handleCreateOrder = () => {
+dispatch(setCustomerName({name, phone, guests:guestCount}));
+    navigate("/tables")
+  }
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-[#262626] p-2 h-16 flex justify-around">
@@ -48,6 +60,7 @@ const BottomNav = () => {
 
       {/* Tables Button */}
       <button
+      disabled={isActive("/tables") ||  isActive("/menu")}
         onClick={() => navigate("/tables")}
         className={`flex items-center justify-center font-bold ${isActive("/tables") ? "text-[#f5f5f5] bg-[#343434]" : "text-[#ababab]"} w-[300px] rounded-[20px]`}
         >     
@@ -76,6 +89,9 @@ const BottomNav = () => {
           </label>
           <div className="flex items-center rounded-lg p-3 px-4 bg-[#1f1f1f]">
             <input
+            value={name}
+            onChange={(e)=>setName(e.target.value)}
+            
               id=""
               name=""
               type="text"
@@ -91,6 +107,8 @@ const BottomNav = () => {
           </label>
           <div className="flex items-center rounded-lg p-3 px-4 bg-[#1f1f1f]">
             <input
+            value={phone}
+            onChange={(e)=>setPhone(e.target.value)}
               id=""
               name=""
               type="number"
@@ -116,7 +134,7 @@ const BottomNav = () => {
         </div>
 
         <button
-          onClick={() => navigate("/tables")}
+          onClick={handleCreateOrder}
           className="w-full bg-[#F6B100] text-[#f5f5f5] rounded-lg py-3 mt-8 hover:bg-yellow-700"
         >
           Create Order
