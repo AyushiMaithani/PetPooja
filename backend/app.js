@@ -3,17 +3,26 @@ const express = require('express');
 const connectDB = require('./config/database');
 const config = require('./config/config');
 const globalErrorHandler = require('./middlewares/globalErrorHandler');
+const cookieParser = require('cookie-parser');
 const app = express();
+
 
 const PORT = config.port;
 connectDB();
+
+//middlewares
+app.use(express.json());
+app.use(cookieParser());
 
 //root endpoint
 app.get('/', (req, res) => {
     res.json ({message: 'Hello from Server!'});
 });
 
-//global error handler
+//other endpoints
+app.use('/api/user', require('./routes/userRoute'));
+
+//global error handler(to be at last)
 app.use(globalErrorHandler)
 
 //server
