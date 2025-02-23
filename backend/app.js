@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 //other endpoints
 app.use('/api/user', require('./routes/userRoute'));
 app.use('/api/order', require('./routes/orderRoute'));
+app.use('/api/table', require('./routes/tableRoute'));
 
 //global error handler(to be at last)
 app.use(globalErrorHandler)
