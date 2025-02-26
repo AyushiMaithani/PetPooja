@@ -1,7 +1,15 @@
 import React from "react";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "../../https/index";
+import { enqueueSnackbar } from "notistack";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
     const [formData, setFormData] = useState({
             email: "",
             password: "",
@@ -13,11 +21,25 @@ function Login() {
           
           const handleSubmit = (e) => {
             e.preventDefault();
-            console.log(formData);
-            setFormData({
-              email: "",
-              password: ""})
+            loginMutation.mutate(formData);
           };
+
+          const loginMutation=useMutation({
+            mutationFn:(reqData)=>login(reqData),
+            onSuccess:(res)=>{
+              const {data}=res;
+              const {_id,name,email,phone,role}=data.data;
+              dispatch(setUser({_id,name,email,phone,role}));
+              navigate('/');
+              
+            },
+            onError:(error)=>{
+              const {response}=error;
+              enqueueSnackbar(response.data.message,{variant:'error'}); 
+            }
+          })
+
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
