@@ -1,11 +1,24 @@
-export const color = () => {
-  return `rgba(${(Math.random() * 255).toFixed()},${(
-    Math.random() * 255
-  ).toFixed()},${(Math.random() * 255).toFixed()},0.8)`;
+export const getBgColor = () => {
+  const bgarr = [
+    "#b73e3e",
+    "#5b45b0",
+    "#7f167f",
+    "#735f32",
+    "#1d2569",
+    "#285430",
+    "#f6b100",
+    "#025cca",
+    "#be3e3f",
+    "#02ca3a",
+  ];
+  const randomBg = Math.floor(Math.random() * bgarr.length);
+  const color = bgarr[randomBg];
+  return color;
 };
 
+
 export const getInitials = (name) => {
-  if (!name) return "GUEST";
+  if (!name) return "";
 
   const nameParts = name.split(" ");
   const initials = nameParts
