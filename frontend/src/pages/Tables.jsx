@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import BottomNav from "../components/shared/BottomNav";
 import BackButton from "../components/shared/BackButton";
 import TableCard from "../components/tables/TableCard"; 
@@ -8,8 +8,12 @@ import { getTables } from "../https";
 import { enqueueSnackbar } from "notistack";
 
 const Tables = () => {
-  const [status, setStatus] = useState("all");
 
+  useEffect(() => {
+    document.title = "PetPooja | Tables"
+  }, [])
+
+  const [status, setStatus] = useState("all");
   const {data:resData,isError}=useQuery({
     queryKey:['tables'],
     queryFn:async()=>{
@@ -56,11 +60,11 @@ const Tables = () => {
   {resData?.data.data.map((table) => {
     return (
       <TableCard
-        key={table._id} 
-        id={table.id}
+        key={table._id}
+        id={table._id}
         name={table.tableNo} 
         status={table.status}
-        initials={table?.currentOrder?.customerDetails?.name[0]}
+        initials={table?.currentOrder?.customerDetails?.name}
         seats={table.seats}
       />
     );

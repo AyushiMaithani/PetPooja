@@ -38,13 +38,11 @@ const getOrderById=async(req,res,next)=>{
 
 const getOrders=async(req,res,next)=>{
     try {
-        const orders=await Order.find();
-        res.status(200).json({data:orders});
-        
-    } catch (error) {
+        const orders = await Order.find().populate("table");
+        res.status(200).json({ data: orders });
+      } catch (error) {
         next(error);
-        
-    }
+      }
 }
 
 const updateOrder=async(req,res,next)=>{

@@ -3,7 +3,7 @@ import { MdTableBar, MdCategory } from "react-icons/md";
 import { BiSolidDish } from "react-icons/bi";
 import Metrics from "../components/dashboard/Metrics";
 import RecentOrders from "../components/dashboard/RecentOrders";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Modal from "../components/dashboard/Modal";
 
 const buttons = [
@@ -15,6 +15,9 @@ const buttons = [
 const tabs=["Metrics","Orders","Payment"]
 
 const Dashboard = () => {
+  useEffect(() => {
+    document.title = "PetPooja | Admin Dashboard"
+  }, [])
   const [isTableModalOpen,setIsTableModalOpen ] = useState(false);
   const [activeTab, setActiveTab] = useState("Metrics");
 

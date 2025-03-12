@@ -1,4 +1,4 @@
-import React from "react";
+import {useEffect} from "react";
 import BottomNav from "../components/shared/BottomNav";
 import BackButton from "../components/shared/BackButton";
 import { MdRestaurantMenu } from "react-icons/md";
@@ -10,7 +10,12 @@ import { useSelector } from "react-redux";
 
 const Menu = () => {
   
+  useEffect(() => {
+    document.title = "PetPooja | Menu"
+  }, [])
+
   const customerData=useSelector(state=>state.customer);
+  console.log(customerData);
 
   return (
     <section className="bg-[#1f1f1f] h-[calc(100vh-5rem)] overflow-hidden flex gap-3">
@@ -28,7 +33,9 @@ const Menu = () => {
                 <h1 className="text-md text-[#f5f5f5] font-semibold tracking-wide">
                 {customerData.customerName || "Guest"} 
                 </h1>
-                <p className="text-xs text-[#ababab] font-medium">{customerData.tableNo || "N/A"} </p>
+                <p className="text-xs text-[#ababab] font-medium">
+                  Table: {customerData.table?.tableNo || "N/A"} 
+                  </p>
               </div>
             </div>
           </div>

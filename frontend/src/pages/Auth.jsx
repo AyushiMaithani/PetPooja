@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import restaurant from '../assets/images/restaurant.jpg';
 import logo from '../assets/images/logo.png'; 
 import Register from "../components/auth/Register";
@@ -6,6 +6,10 @@ import Login from "../components/auth/Login";
 
 const Auth = () => {
   const[isRegister, setIsRegister] = useState(false)
+  useEffect(() => {
+    document.title = "PetPooja | Auth"
+  }, [])
+
   
   return (
     <div className="flex min-h-screen w-full">

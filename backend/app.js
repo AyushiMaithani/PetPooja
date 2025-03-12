@@ -14,7 +14,7 @@ connectDB();
 //middlewares
 app.use(cors({
     credentials: true,
-    origin: ['https://petpooja-frontend.onrender.com']
+    origin: ['http://localhost:5173']
 }))
 app.use(express.json());
 app.use(cookieParser());

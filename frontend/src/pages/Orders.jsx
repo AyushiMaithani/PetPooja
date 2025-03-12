@@ -1,10 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import BottomNav from '../components/shared/BottomNav';
 import OrderCard from '../components/orders/OrderCard';
 import BackButton from '../components/shared/BackButton';
+import { getOrders } from '../https';
+import { enqueueSnackbar } from 'notistack';
+import { useQuery,keepPreviousData } from '@tanstack/react-query';
 
 const Orders = () => {
+
+  useEffect(() => {
+    document.title = "PetPooja | Orders"
+  }, [])
+
   const [status, setStatus] = useState('all');
+  const { data: resData, isError } = useQuery({
+    queryKey: ["orders"],
+    queryFn: async () => {
+      const data = await getOrders();
+      console.log(data.data.data);
+      return await getOrders();
+    },
+    placeholderData: keepPreviousData
+  })
+
+  if(isError) {
+    enqueueSnackbar("Something went wrong!", {variant: "error"})
+  }
+  
+
+
   return ( 
     <section className='bg-[#1f1f1f] h-[calc(100vh-5rem)] overflow-hidden'> 
       <div className='flex items-center justify-between px-10 py-4'> 
@@ -46,20 +70,13 @@ const Orders = () => {
       </div>
 
     <div className='px-16 py-4 flex flex-wrap gap-6 overflow-y-auto scrollbar-hide h-[calc(100vh-14rem)]'>
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
-      <OrderCard />
+    {
+          resData?.data.data.length > 0 ? (
+            resData.data.data.map((order) => {
+              return <OrderCard key={order._id} order={order} />
+            })
+          ) : <p className="col-span-3 text-gray-500">No orders available</p>
+        }
       </div>
       <BottomNav /> 
 

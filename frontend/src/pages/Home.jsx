@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Greetings from "../components/home/Greetings";
 import MiniCard from "../components/home/MiniCard";
 import { BsCashCoin } from "react-icons/bs";
@@ -7,6 +8,11 @@ import BottomNav from "../components/shared/BottomNav";
 import PopularDishes from "../components/home/PopularDishes";
 
 const Home = () => {
+
+  useEffect(() => {
+    document.title = "PetPooja | Home"
+  }, [])
+
   return (
     <section className="bg-[#1f1f1f] h-[calc(100vh-5rem)] overflow-hidden flex gap-3">
       {/* Left Div */}

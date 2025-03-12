@@ -18,7 +18,13 @@ export const logout=()=>api.post('/api/user/logout');
 //table endpoints
 export const addTable=(data)=>api.post('/api/table',data);
 export const getTables=()=>api.get('/api/table');
+export const updateTable=({tableId,...tableData})=>api.put(`/api/table/${tableId}`,tableData);
 
 //payment endpoints
 export const createOrderRazorpay=(data)=>api.post('/api/payment/create-order',data);
 export const verifyPaymentRazorpay = (data) =>api.post("/api/payment/verify-payment", data);
+
+//order endpoints
+export const addOrder=(data)=>api.post('/api/order',data);
+export const getOrders=()=>api.get('/api/order');
+export const updateOrderStatus=({orderId,orderStatus})=>api.put(`/api/order/${orderId}`,{orderStatus});

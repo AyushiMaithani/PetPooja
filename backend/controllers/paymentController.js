@@ -78,7 +78,6 @@ const webHookVerification=async(req,res,next)=>{
           contact: payment.contact,
           createdAt: new Date(payment.created_at * 1000) 
         })
-
         await newPayment.save();
       }
 
