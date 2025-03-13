@@ -99,6 +99,8 @@ const logout=async(req,res,next)=>{
             success:true,
             message:"User logged out successfully"
         });
+        await req.user.save();
+        console.log(req.user);
     }
     catch(error){
         next(error);
