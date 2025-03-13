@@ -88,6 +88,7 @@ try{
         success:true,
         data:user
     });
+    console.log("get user data");
 }
 catch(error){
     next(error);    
