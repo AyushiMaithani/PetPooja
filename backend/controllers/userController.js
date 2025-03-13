@@ -73,6 +73,8 @@ const login=async(req,res,next)=>{
             data:isUserPresent
 
     });
+
+    console.log("logged in");
 }
     catch(error){
         next(error);

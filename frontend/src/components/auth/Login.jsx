@@ -31,6 +31,7 @@ function Login() {
               const {_id,name,email,phone,role}=data.data;
               dispatch(setUser({_id,name,email,phone,role}));
               navigate('/');
+              console.log(data.message);
               
             },
             onError:(error)=>{
