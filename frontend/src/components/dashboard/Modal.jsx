@@ -23,7 +23,6 @@ const Modal = ({setIsTableModalOpen}) => {
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        console.log(tableData);
         tableMutation.mutate(tableData);
     }
 

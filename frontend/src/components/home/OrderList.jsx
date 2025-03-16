@@ -4,7 +4,7 @@ import { FaCircle } from "react-icons/fa";
 import { getInitials } from "../../utils";
 
 const OrderList = ({order}) => {
-  console.log(order);
+
   return (
     <div
     className="flex items-center gap-5 mb-3">

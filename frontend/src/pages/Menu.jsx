@@ -15,7 +15,6 @@ const Menu = () => {
   }, [])
 
   const customerData=useSelector(state=>state.customer);
-  console.log(customerData);
 
   return (
     <section className="bg-[#1f1f1f] h-[calc(100vh-5rem)] overflow-hidden flex gap-3">

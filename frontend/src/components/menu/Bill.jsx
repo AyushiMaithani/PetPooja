@@ -81,7 +81,6 @@ const Bill = () => {
           order_id: data.order.id,
           handler: async function (response) {
             const verification = await verifyPaymentRazorpay(response);
-            console.log(verification);
             enqueueSnackbar(verification.data.message, { variant: "success" });
 
             // Place the order
@@ -180,7 +179,6 @@ const Bill = () => {
   const tableUpdateMutation = useMutation({
     mutationFn: (reqData) => updateTable(reqData),
     onSuccess: (resData) => {
-      console.log(resData);
       dispatch(removeCustomer());
       dispatch(removeAllItems());
     },

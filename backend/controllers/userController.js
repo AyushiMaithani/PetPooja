@@ -74,7 +74,7 @@ const login=async(req,res,next)=>{
 
     });
 
-    console.log("logged in");
+    console.log(isUserPresent.name,"logged in");
 }
     catch(error){
         next(error);
@@ -88,7 +88,7 @@ try{
         success:true,
         data:user
     });
-    console.log("get user data");
+    console.log("get data of",user.name);
 }
 catch(error){
     next(error);    
@@ -102,8 +102,7 @@ const logout=async(req,res,next)=>{
             success:true,
             message:"User logged out successfully"
         });
-        await req.user.save();
-        console.log(req.user);
+        console.log(req.user.name,"logged out");
     }
     catch(error){
         next(error);

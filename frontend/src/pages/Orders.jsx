@@ -17,7 +17,6 @@ const Orders = () => {
     queryKey: ["orders"],
     queryFn: async () => {
       const data = await getOrders();
-      console.log(data.data.data);
       return await getOrders();
     },
     placeholderData: keepPreviousData
@@ -72,7 +71,7 @@ const Orders = () => {
     <div className='px-16 py-4 flex flex-wrap gap-6 overflow-y-auto scrollbar-hide h-[calc(100vh-14rem)]'>
     {
           resData?.data.data.length > 0 ? (
-            resData.data.data.map((order) => {
+            resData.data.data.map((order,id) => {
               return <OrderCard key={order._id} order={order} />
             })
           ) : <p className="col-span-3 text-gray-500">No orders available</p>

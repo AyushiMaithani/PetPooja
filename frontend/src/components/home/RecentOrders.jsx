@@ -8,7 +8,6 @@ const RecentOrders = () => {
     queryKey: ["orders"],
     queryFn: async () => {
       const data = await getOrders();
-      console.log(data.data.data);
       return await getOrders();
     },
     placeholderData: keepPreviousData,

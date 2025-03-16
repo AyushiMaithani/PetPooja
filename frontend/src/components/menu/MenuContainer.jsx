@@ -38,7 +38,6 @@ const MenuContainer = () => {
       quantity: currentItemCount,
       price: price * currentItemCount
     };
-    console.log(itemCount)
 dispatch(addItems(newItem));
 setItemCount(0);
   }
