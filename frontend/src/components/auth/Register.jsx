@@ -145,7 +145,7 @@ const Register = ({setIsRegister}) => {
           type="submit"
           className="w-full mt-6 py-3 text-lg bg-yellow-400 text-gray-900 font-bold"
         >
-          Sign in
+          Sign up
         </button>
       </form>
     </div>
