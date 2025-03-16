@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"; 
+import { useDispatch } from "react-redux";
 import { getUserData } from "../https";
+import { useEffect, useState } from "react";
 import { removeUser, setUser } from "../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -9,33 +9,24 @@ const useLoadData = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
-  // Access user data from Redux state using useSelector
-  const user = useSelector(state => state.user); 
-
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const { data } = await getUserData();
+        console.log(data);
         const { _id, name, email, phone, role } = data.data;
         dispatch(setUser({ _id, name, email, phone, role }));
-      }
-       catch (error) {
+      } catch (error) {
         dispatch(removeUser());
-        navigate('/auth');
+        Navigate("/auth");
         console.log(error);
-      } 
-      finally {
+      }finally{
         setIsLoading(false);
       }
     };
 
-    if (user && user._id) {
-      fetchUser();
-    } else {
-      setIsLoading(false); 
-      navigate('/auth');
-    }
-  }, [dispatch, navigate, user]); 
+    fetchUser();
+  }, [dispatch, navigate]);
 
   return isLoading;
 };
